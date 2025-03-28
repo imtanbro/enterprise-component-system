@@ -1,0 +1,48 @@
+# Node modules
+node_modules/
+
+# Build output
+/build/
+# or for CRA (Create React App) specific
+/dist/
+
+# Dependency directories
+/.pnp/
+.pnp.js
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE and editor folders
+/.idea/
+/.vscode/
+
+# Mac system files
+*.swp
+
+# Coverage directory used by testing tools
+/coverage/
+
+# React Native specific
+/react-native/
+
+# Test artifacts (if you use jest)
+/jest/
+
+# Build tools
+/.cache/
+
+# Next.js specific (if using Next.js)
+.next/
