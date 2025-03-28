@@ -2,6 +2,8 @@ import React from "react";
 import "./ErrorPage.css"; // Import CSS for styling
 
 const ErrorPage: React.FC = () => {
+  console.log("ErrorPage Component Rendered");
+
   return (
     <div className="error-container">
       <div className="error-content">

@@ -10,3 +10,8 @@ root.render(
     <App />
   </ErrorBoundary>
 );
+
+// <ModalProvider>
+//   <App />
+//      <Modal />
+// </ModalProvider>
