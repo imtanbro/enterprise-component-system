@@ -1,29 +1,37 @@
-import React, { useContext, useRef, useEffect, useState } from "react";
+import React, { useContext, useRef, useEffect, useState, useCallback } from "react";
 import "./Modal.css";
 import { ModalContext } from "./ModalContext";
 
-export const Modal = () => {
+// Memoize the Modal component to avoid unnecessary re-renders
+const Modal = React.memo(() => {
+  console.log("Modal Rendered");
+  
   const { modalContent, closeModal, isOpen } = useContext(ModalContext)!;
-  console.log("Modal Open:", isOpen);
 
   const modalRef = useRef<HTMLDivElement>(null);
   const [isResizing, setIsResizing] = useState(false);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-        console.log("Key Pressed:", e.key);
-        
+  // Memoize the keydown handler to avoid unnecessary re-creations
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal();
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [closeModal]);
+    },
+    [closeModal] // Dependency array to ensure the callback only updates when closeModal changes
+  );
 
+  // Register and clean up the keydown event listener
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  // Initialize the modal resizer (only once)
   useEffect(() => {
     if (!modalRef.current) return;
-    let isResizing = false;
-    const modal = modalRef.current;
 
+    const modal = modalRef.current;
     const resizer = document.createElement("div");
     resizer.className = "modal-resizer";
     resizer.style.position = "absolute";
@@ -35,25 +43,33 @@ export const Modal = () => {
 
     modal.appendChild(resizer);
 
-    resizer.addEventListener("mousedown", (e) => {
+    const onMouseDown = (e: MouseEvent) => {
       e.preventDefault();
-      isResizing = true;
-    });
+      setIsResizing(true);
+    };
 
-    document.addEventListener("mousemove", (e) => {
+    const onMouseMove = (e: MouseEvent) => {
       if (!isResizing || !modal) return;
       modal.style.width = `${e.clientX - modal.offsetLeft}px`;
       modal.style.height = `${e.clientY - modal.offsetTop}px`;
-    });
+    };
 
-    document.addEventListener("mouseup", () => {
-      isResizing = false;
-    });
+    const onMouseUp = () => {
+      setIsResizing(false);
+    };
 
+    resizer.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+
+    // Cleanup event listeners
     return () => {
+      resizer.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
       resizer.remove();
     };
-  }, []);
+  }, [isResizing]);
 
   if (!isOpen) return null;
 
@@ -67,4 +83,6 @@ export const Modal = () => {
       </div>
     </div>
   );
-};
+});
+
+export default Modal;
