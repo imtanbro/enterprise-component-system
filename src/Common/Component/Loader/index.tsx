@@ -1,6 +1,8 @@
 import React from "react";
 
 const Loader: React.FC = () => {
+  console.log("Loader Component Rendered");
+
   return (
     <div className="loader">
       Loading...
