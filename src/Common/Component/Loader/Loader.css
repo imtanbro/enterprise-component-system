@@ -1,0 +1,12 @@
+
+/* Loader Styling */
+.loader {
+    font-size: 24px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Styling for loaded content */
+  .content {
+    padding: 20px;
+  }

@@ -1,0 +1,115 @@
+/* Error Page Styling */
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align to the top of the screen */
+  height: calc(100vh - 60px); /* Subtract height of navbar to ensure it doesn't overflow */
+  padding: 15px;
+  margin-top: 60px; /* Adjust to space out below the navbar */
+}
+
+/* Light Mode and Dark Mode Styles */
+.error-content {
+  text-align: center;
+  width: 100%;
+  max-width: 480px;
+  padding: 20px;
+  background-color: #ffffff; /* Default to light background */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Dark mode styles for the error page */
+body.dark .error-content {
+  background-color: #333; /* Dark background */
+  color: #fff; /* Light text for dark mode */
+}
+
+body.dark .error-title {
+  color: #ff6f61; /* Light red color for dark mode */
+}
+
+body.dark .error-message,
+body.dark .error-details {
+  color: #ddd; /* Light gray text for dark mode */
+}
+
+body.dark .back-button {
+  background-color: #007bff; /* Blue button for dark mode */
+}
+
+body.dark .back-button:hover {
+  background-color: #0056b3;
+}
+
+.error-title {
+  font-size: 2rem;
+  color: #d9534f;
+  margin-bottom: 10px;
+}
+
+.error-message {
+  font-size: 1rem;
+  color: #5a5a5a;
+  margin-bottom: 15px;
+}
+
+.error-details {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 25px;
+}
+
+.back-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+/* Mobile and Medium Screens */
+@media (min-width: 768px) {
+  .error-title {
+    font-size: 2.5rem;
+  }
+
+  .error-message {
+    font-size: 1.2rem;
+  }
+
+  .error-details {
+    font-size: 1rem;
+  }
+
+  .back-button {
+    font-size: 1.2rem;
+  }
+}
+
+/* Larger Screens */
+@media (min-width: 1024px) {
+  .error-title {
+    font-size: 3rem;
+  }
+
+  .error-message {
+    font-size: 1.5rem;
+  }
+
+  .error-details {
+    font-size: 1.1rem;
+  }
+
+  .back-button {
+    font-size: 1.3rem;
+  }
+}
