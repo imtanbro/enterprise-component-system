@@ -3,6 +3,7 @@ import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import LandingPage from "./Component/LandingPage";
 import ErrorPage from "./Common/Component/ErrorPage";
 import Loader from "./Common/Component/Loader";
+import ResizableCards from "./Component/ResizableCards";
 
 const DataGrid = React.lazy(() => import("./Component/DataGrid"));
 
@@ -13,7 +14,7 @@ const App: React.FC = () => {
         <div>
           <Routes>
             <Route path="/" element={<LandingPage />}>
-              <Route path="/" element={<LandingPage />} />
+              <Route path="/" element={<ResizableCards />} />
               <Route
                 path="/data-grid"
                 element={
