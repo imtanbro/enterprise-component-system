@@ -1,0 +1,101 @@
+/* Dark Mode */
+/* :root {
+  --bg-color: white;
+  --text-color: black;
+}
+
+.dark {
+  --bg-color: black;
+  --text-color: white;
+} */
+
+/* Navbar Styling */
+.navbar {
+  background: var(--bg-color);
+  color: var(--text-color);
+  padding: 15px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Navigation Links */
+.navLinks {
+  display: none;
+}
+
+.navLinks ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1.2rem;
+}
+
+.showMenu {
+  display: block;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background: var(--bg-color);
+  width: 100%;
+  text-align: center;
+  padding: 15px 0;
+  border-top: 1px solid gray;
+}
+
+/* Desktop View */
+@media (min-width: 768px) {
+  .navLinks {
+    display: flex;
+  }
+
+  .navLinks ul {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .showMenu {
+    position: static;
+    display: flex;
+  }
+}
+
+/* Menu & Theme Toggle Buttons */
+.menuButton,
+.themeToggle {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.menuButton {
+  display: block;
+}
+
+.themeToggle {
+  margin-left: 10px;
+}
+
+/* Hide menu button on larger screens */
+@media (min-width: 768px) {
+  .menuButton {
+    display: none;
+  }
+}
