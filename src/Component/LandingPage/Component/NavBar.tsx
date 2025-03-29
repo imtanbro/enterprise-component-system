@@ -41,8 +41,8 @@ function Navbar() {
         <Link to="/data-grid" onClick={() => setIsMenuOpen(false)}>
           Data Grid
         </Link>
-        <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-          Contact
+        <Link to="/multi-step-form" onClick={() => setIsMenuOpen(false)}>
+          Multi Step Form
         </Link>
       </div>
     </nav>
