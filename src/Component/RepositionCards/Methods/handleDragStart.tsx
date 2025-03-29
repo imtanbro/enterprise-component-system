@@ -45,9 +45,7 @@ const handleDragStart: HandleDragStart = (cardRefs, card, e, cardData, setCardDa
   };
 
   const updateCardPosition = (id: number, newPosition: { x: number; y: number }) => {
-    const updatedCardData = cardData.map((card) =>
-      card.id === id ? { ...card, position: newPosition } : card
-    );
+    const updatedCardData = cardData.map((card) => (card.id === id ? { ...card, position: newPosition } : card));
     setCardData(updatedCardData);
     localStorage.setItem("cardsData", JSON.stringify(updatedCardData));
   };
@@ -67,19 +65,16 @@ const handleDragStart: HandleDragStart = (cardRefs, card, e, cardData, setCardDa
     const currentCardRef = cardRefs.current[id].current;
     const currentRect = currentCardRef.getBoundingClientRect();
 
-    // Ensure the top position is at least 100px
-    if (currentRect.top < 100) return true; // if current card's top is below 100px, consider as overlap
+    if (currentRect.top < 100) return true;
 
     return cardData.some((otherCard) => {
-      if (otherCard.id === id) return false; // Skip the current card
+      if (otherCard.id === id) return false;
 
       const otherCardRef = cardRefs.current[otherCard.id].current;
       const otherRect = otherCardRef.getBoundingClientRect();
 
-      // Ensure the other card's top position is at least 100px
-      if (otherRect.top < 100) return true; // if other card's top is below 100px, consider as overlap
+      if (otherRect.top < 100) return true;
 
-      // Check for overlap using the bounding rectangle
       return !(
         currentRect.right < otherRect.left ||
         currentRect.left > otherRect.right ||

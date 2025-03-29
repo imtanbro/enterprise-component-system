@@ -5,7 +5,6 @@ import { ModalProvider } from "./Common/Component/Modal/ModalContext";
 import { withCenteredLayout } from "./Component/RepositionCards";
 import Loader from "./Common/Component/Loader";
 
-// Lazy load components
 const Navbar = lazy(() => import("./Component/LandingPage/Component/NavBar"));
 const DashboardLayout = lazy(() => import("./Component/DashboardLayout"));
 const RepositionCards = lazy(() => import("./Component/RepositionCards"));
@@ -21,7 +20,6 @@ const App: React.FC = () => {
     <ThemeProvider>
       <Router>
         <div className="layout-container">
-          {/* Suspense wrapper to handle lazy loading fallback */}
           <Suspense fallback={<Loader size={50} color="#ff6347" />}>
             <Navbar />
             <main>
@@ -56,5 +54,4 @@ const App: React.FC = () => {
   );
 };
 
-// Memoize the App component to prevent unnecessary re-renders
 export default memo(App);

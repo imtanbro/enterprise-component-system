@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 
-// Define the types for the props and state
 interface ErrorBoundaryProps {
   children: ReactNode;
 }
@@ -21,26 +20,21 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     };
   }
 
-  // This lifecycle method is triggered when an error is thrown in any child component
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    // Update state to render the fallback UI
     return { hasError: true, error: error, errorInfo: null };
   }
 
-  // This lifecycle method gives you more information about the error (e.g., component stack)
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
     this.setState({
       error: error,
       errorInfo: errorInfo,
     });
 
-    // Optionally log the error to an error reporting service
     console.error("Error caught in ErrorBoundary:", error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      // Render fallback UI when there's an error
       return (
         <div style={styles.container}>
           <div style={styles.errorBox}>
@@ -73,7 +67,6 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
       );
     }
 
-    // Otherwise, render children as usual
     return this.props.children;
   }
 }

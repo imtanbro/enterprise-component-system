@@ -36,12 +36,11 @@ const DashboardLayout: React.FC = () => {
             key={panel.id}
             id={panel.id}
             title={panel.title}
-            isMaximized={maximizedPanelId === panel.id} // Check if this panel is maximized
-            onMaximizedChange={handleMaximized} // Passing the callback function
-            isCollapsed={collapsedPanels.includes(panel.id)} // Panel's collapse state
-            onCollapseChange={handleCollapse} // Collapse/Expand handler
+            isMaximized={maximizedPanelId === panel.id}
+            onMaximizedChange={handleMaximized}
+            isCollapsed={collapsedPanels.includes(panel.id)}
+            onCollapseChange={handleCollapse}
           >
-            {/* Panel content */}
             {panel.id === "overview" && <Overview />}
             {panel.id === "activity" && <Activity />}
             {panel.id === "actions" && <Actions />}

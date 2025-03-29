@@ -1,4 +1,3 @@
-// Generate 10,000 rows of data
 const generateData = () => {
   const data = [];
   const statuses = ["In Transit", "Delivered", "Pending", "Delayed"];

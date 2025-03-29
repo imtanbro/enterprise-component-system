@@ -1,9 +1,8 @@
 import React, { memo } from "react";
-import "./Loader.css"; // Import CSS for animation
-
+import "./Loader.css";
 interface LoaderProps {
-  size?: number; // Optional size prop to customize the size of the spinner
-  color?: string; // Optional color prop to customize the color of the spinner
+  size?: number;
+  color?: string;
 }
 
 const Loader: React.FC<LoaderProps> = ({ size = 40, color = "#3498db" }) => {

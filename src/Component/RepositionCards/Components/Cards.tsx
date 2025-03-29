@@ -40,7 +40,6 @@ const Cards: React.FC<CardsProps> = ({ cardData, setCardData }) => {
           text={card.text}
           isDarkMode={false}
           onMouseDown={(e) => {
-            console.log("Card ID:", card.id);
             handleDragStart(cardRefs, card, e, cardData, setCardData);
           }}
         />

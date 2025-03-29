@@ -34,5 +34,4 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
   return <ModalContext.Provider value={{ openModal, closeModal, modalContent, isOpen }}>{children}</ModalContext.Provider>;
 };
 
-// ✅ Fix: Export `ModalContext`
 export { ModalContext };
