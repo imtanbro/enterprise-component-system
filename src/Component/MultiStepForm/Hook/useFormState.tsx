@@ -52,7 +52,7 @@ export const useFormState = () => {
 
   const updateField = (field: keyof FormData, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    // Clear error when field is updated
+
     if (errors[field]) {
       setErrors((prev) => {
         const newErrors = { ...prev };

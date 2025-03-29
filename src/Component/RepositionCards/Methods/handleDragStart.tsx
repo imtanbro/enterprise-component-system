@@ -1,4 +1,25 @@
-const handleDragStart = (cardRefs, card, e, cardData, setCardData) => {
+interface Card {
+  id: number;
+  position: { x: number; y: number };
+}
+
+interface CardRefs {
+  current: {
+    [key: number]: {
+      current: HTMLDivElement;
+    };
+  };
+}
+
+type HandleDragStart = (
+  cardRefs: CardRefs,
+  card: Card,
+  e: React.MouseEvent<HTMLDivElement>,
+  cardData: Card[],
+  setCardData: React.Dispatch<React.SetStateAction<Card[]>>
+) => void;
+
+const handleDragStart: HandleDragStart = (cardRefs, card, e, cardData, setCardData) => {
   const { id } = card;
   const cardRef = cardRefs.current[id].current;
   const rect = cardRef.getBoundingClientRect();
@@ -23,13 +44,15 @@ const handleDragStart = (cardRefs, card, e, cardData, setCardData) => {
     }
   };
 
-  const updateCardPosition = (id, newPosition) => {
-    const updatedCardData = cardData.map((card) => (card.id === id ? { ...card, position: newPosition } : card));
+  const updateCardPosition = (id: number, newPosition: { x: number; y: number }) => {
+    const updatedCardData = cardData.map((card) =>
+      card.id === id ? { ...card, position: newPosition } : card
+    );
     setCardData(updatedCardData);
     localStorage.setItem("cardsData", JSON.stringify(updatedCardData));
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent) => {
     const newX = e.clientX - offsetX;
     const newY = e.clientY - offsetY;
 
