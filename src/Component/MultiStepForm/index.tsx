@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { FormProgress } from "./Component/FormProgress";
 import { useFormState } from "./Hook/useFormState";
 import { ReviewStep } from "./Component/ReviewStep";
@@ -51,4 +51,4 @@ const MultiStepForm = () => {
   );
 };
 
-export default MultiStepForm;
+export default memo(MultiStepForm);

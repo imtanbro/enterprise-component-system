@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, memo } from "react";
 
 interface CardProps {
   id: number;
@@ -25,4 +25,4 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(({ id, initialPos, text
   );
 });
 
-export default Card;
+export default memo(Card);

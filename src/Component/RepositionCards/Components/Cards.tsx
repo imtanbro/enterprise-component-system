@@ -1,9 +1,8 @@
-import React, { createRef, useCallback, useEffect, useRef } from "react";
+import React, { createRef, memo, useCallback, useEffect, useRef } from "react";
 import Card from "./Card";
 import determineNewPosition from "../Methods/determineNewPosition";
 import handleDragStart from "../Methods/handleDragStart";
 
-// Define the props for the Cards component
 interface CardsProps {
   cardData: { id: number; text: string; position?: { x: number; y: number } }[];
   setCardData: React.Dispatch<React.SetStateAction<{ id: number; text: string }[]>>;
@@ -16,10 +15,9 @@ const Cards: React.FC<CardsProps> = ({ cardData, setCardData }) => {
     const updatedCardData = cardData.map((card) => {
       const savedCardData = savedCardsData.find((savedCard: any) => savedCard.id === card.id);
       if (savedCardData) {
-        return { ...card, position: savedCardData.position }; // Provide a default position or handle appropriately
+        return { ...card, position: savedCardData.position };
       } else {
         const position = determineNewPosition();
-        console.log("New Position:", position);
 
         return { ...card, position };
       }
@@ -29,7 +27,7 @@ const Cards: React.FC<CardsProps> = ({ cardData, setCardData }) => {
     localStorage.setItem("cardsData", JSON.stringify(updatedCardData));
   }, []);
 
-  const cardRefs = useRef<React.RefObject<HTMLDivElement | null>[]>([]);
+  const cardRefs = useRef<{ [key: number]: React.RefObject<HTMLDivElement> }>({});
 
   return (
     <div>
@@ -40,6 +38,7 @@ const Cards: React.FC<CardsProps> = ({ cardData, setCardData }) => {
           id={card.id}
           initialPos={card.position}
           text={card.text}
+          isDarkMode={false}
           onMouseDown={(e) => {
             console.log("Card ID:", card.id);
             handleDragStart(cardRefs, card, e, cardData, setCardData);
@@ -50,4 +49,4 @@ const Cards: React.FC<CardsProps> = ({ cardData, setCardData }) => {
   );
 };
 
-export default Cards;
+export default memo(Cards);
