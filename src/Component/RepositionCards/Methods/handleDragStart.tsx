@@ -1,4 +1,25 @@
-const handleDragStart = (cardRefs, card, e, cardData, setCardData) => {
+interface Card {
+  id: number;
+  position: { x: number; y: number };
+}
+
+interface CardRefs {
+  current: {
+    [key: number]: {
+      current: HTMLDivElement;
+    };
+  };
+}
+
+type HandleDragStart = (
+  cardRefs: CardRefs,
+  card: Card,
+  e: React.MouseEvent<HTMLDivElement>,
+  cardData: Card[],
+  setCardData: React.Dispatch<React.SetStateAction<Card[]>>
+) => void;
+
+const handleDragStart: HandleDragStart = (cardRefs, card, e, cardData, setCardData) => {
   const { id } = card;
   const cardRef = cardRefs.current[id].current;
   const rect = cardRef.getBoundingClientRect();
@@ -23,13 +44,13 @@ const handleDragStart = (cardRefs, card, e, cardData, setCardData) => {
     }
   };
 
-  const updateCardPosition = (id, newPosition) => {
+  const updateCardPosition = (id: number, newPosition: { x: number; y: number }) => {
     const updatedCardData = cardData.map((card) => (card.id === id ? { ...card, position: newPosition } : card));
     setCardData(updatedCardData);
     localStorage.setItem("cardsData", JSON.stringify(updatedCardData));
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent) => {
     const newX = e.clientX - offsetX;
     const newY = e.clientY - offsetY;
 
@@ -44,19 +65,16 @@ const handleDragStart = (cardRefs, card, e, cardData, setCardData) => {
     const currentCardRef = cardRefs.current[id].current;
     const currentRect = currentCardRef.getBoundingClientRect();
 
-    // Ensure the top position is at least 100px
-    if (currentRect.top < 100) return true; // if current card's top is below 100px, consider as overlap
+    if (currentRect.top < 100) return true;
 
     return cardData.some((otherCard) => {
-      if (otherCard.id === id) return false; // Skip the current card
+      if (otherCard.id === id) return false;
 
       const otherCardRef = cardRefs.current[otherCard.id].current;
       const otherRect = otherCardRef.getBoundingClientRect();
 
-      // Ensure the other card's top position is at least 100px
-      if (otherRect.top < 100) return true; // if other card's top is below 100px, consider as overlap
+      if (otherRect.top < 100) return true;
 
-      // Check for overlap using the bounding rectangle
       return !(
         currentRect.right < otherRect.left ||
         currentRect.left > otherRect.right ||

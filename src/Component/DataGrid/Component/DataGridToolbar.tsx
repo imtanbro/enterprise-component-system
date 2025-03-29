@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Download, Search } from "lucide-react";
 import exportToCSV from "../Methods/exportToCSV";
 
@@ -40,4 +40,4 @@ const DataGridToolbar: React.FC<DataGridToolbarProps> = ({
   );
 };
 
-export default DataGridToolbar;
+export default memo(DataGridToolbar);

@@ -14,7 +14,7 @@ const steps: { key: FormStep; label: string }[] = [
   { key: "review", label: "Review" },
 ];
 
-export const FormProgress: React.FC<FormProgressProps> = ({ currentStep }) => {
+export const FormProgress: React.FC<FormProgressProps> = React.memo(({ currentStep }) => {
   const currentIndex = steps.findIndex((step) => step.key === currentStep);
 
   return (
@@ -34,4 +34,4 @@ export const FormProgress: React.FC<FormProgressProps> = ({ currentStep }) => {
       </div>
     </div>
   );
-};
+});

@@ -9,12 +9,7 @@ interface FormStepContentProps {
   updateField: (field: keyof FormData, value: any) => void;
 }
 
-export const FormStepContent: React.FC<FormStepContentProps> = ({
-  step,
-  formData,
-  errors,
-  updateField,
-}) => {
+export const FormStepContent: React.FC<FormStepContentProps> = React.memo(({ step, formData, errors, updateField }) => {
   const stepConfig = formSteps[step];
 
   const renderField = (field: keyof FormData) => {
@@ -74,17 +69,8 @@ export const FormStepContent: React.FC<FormStepContentProps> = ({
         return (
           <div className="form-group">
             <label className="form-checkbox-label">
-              <input
-                type="checkbox"
-                checked={value as boolean}
-                onChange={(e) => updateField(field, e.target.checked)}
-                className="form-checkbox"
-              />
-              <span className="checkbox-text">
-                {field === "newsletter"
-                  ? "Subscribe to newsletter"
-                  : "I accept the terms and conditions"}
-              </span>
+              <input type="checkbox" checked={value as boolean} onChange={(e) => updateField(field, e.target.checked)} className="form-checkbox" />
+              <span className="checkbox-text">{field === "newsletter" ? "Subscribe to newsletter" : "I accept the terms and conditions"}</span>
             </label>
             {error && <p className="error-text">{error}</p>}
           </div>
@@ -93,10 +79,7 @@ export const FormStepContent: React.FC<FormStepContentProps> = ({
       default:
         return (
           <div className="form-group">
-            <label className="form-label">
-              {field.charAt(0).toUpperCase() +
-                field.slice(1).replace(/([A-Z])/g, " $1")}
-            </label>
+            <label className="form-label">{field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, " $1")}</label>
             <input
               type={field === "email" ? "email" : "text"}
               value={value as string}
@@ -122,4 +105,4 @@ export const FormStepContent: React.FC<FormStepContentProps> = ({
       </div>
     </div>
   );
-};
+});

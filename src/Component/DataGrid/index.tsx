@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, memo } from "react";
 import { Filter, ChevronDown, ChevronUp } from "lucide-react";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useTheme } from "../../Common/Component/ThemeContext";
 import exportToCSV from "./Methods/exportToCSV";
 import DataGridToolbar from "./Component/DataGridToolbar";
 import NoResultsMessage from "./Component/NoResultsMessage";
@@ -24,7 +23,6 @@ const DataGrid: React.FC = () => {
 
   const parentRef = useRef<HTMLDivElement>(null);
 
-  // Virtual scrolling setup
   const rowVirtualizer = useVirtualizer({
     count: filteredData.length,
     getScrollElement: () => parentRef.current,
@@ -32,17 +30,14 @@ const DataGrid: React.FC = () => {
     overscan: 5,
   });
 
-  // Update filtered data based on search and filters
   useEffect(() => {
     const filtered = data.filter((row) => {
-      // Apply filters
       const matchesFilters = Object.entries(filters).every(([field, value]) => {
         if (!value) return true;
         const cellValue = String(row[field as keyof typeof row]).toLowerCase();
         return cellValue.includes(value.toLowerCase());
       });
 
-      // Apply search
       const matchesSearch = searchTerm === "" || Object.values(row).some((value) => String(value).toLowerCase().includes(searchTerm.toLowerCase()));
 
       return matchesFilters && matchesSearch;
@@ -50,14 +45,12 @@ const DataGrid: React.FC = () => {
 
     setFilteredData(filtered);
 
-    // Show no results if filteredData is empty and search term is not empty
     if (filtered.length === 0 && searchTerm !== "") {
       setShowNoResults(true);
     } else {
       setShowNoResults(false);
     }
 
-    // If no results after filters, set invalidFilter to true
     if (filtered.length === 0 && Object.keys(filters).length > 0) {
       setInvalidFilter(true);
     } else {
@@ -65,7 +58,6 @@ const DataGrid: React.FC = () => {
     }
   }, [searchTerm, filters, data]);
 
-  // Sorting logic
   const sortedData = [...filteredData].sort((a, b) => {
     if (!sortField) return 0;
 
@@ -89,7 +81,6 @@ const DataGrid: React.FC = () => {
   };
 
   const handleRowClick = (row: any, column: { field: string; header: string }[]) => {
-    // Open the modal with the clicked row data
     openModal(
       <div>
         <h3>Details of {row.id}</h3>
@@ -103,10 +94,11 @@ const DataGrid: React.FC = () => {
       </div>
     );
   };
+
   const handleRefreshData = useCallback(() => {
-    setFilters({}); // Reset filters
-    setShowNoResults(false); // Hide the no results message
-    setSearchTerm(""); // Reset search term
+    setFilters({});
+    setShowNoResults(false);
+    setSearchTerm("");
   }, []);
 
   return (
@@ -191,7 +183,7 @@ const DataGrid: React.FC = () => {
                     if (["id", "trackingNumber", "customer", "status", "priority", "estimatedDelivery", "lastUpdate"].includes(column.field))
                       return (
                         <div
-                          onClick={() => handleRowClick(row, columns)} // Handle row click
+                          onClick={() => handleRowClick(row, columns)}
                           key={column.field}
                           className={`data-grid-cell ${frozenColumns.includes(column.field) ? "frozen" : ""}`}
                           style={{ width: column.width || 150 }}
@@ -210,4 +202,4 @@ const DataGrid: React.FC = () => {
   );
 };
 
-export default DataGrid;
+export default memo(DataGrid);

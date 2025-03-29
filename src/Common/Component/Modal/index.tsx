@@ -1,25 +1,20 @@
-import React, { useContext, useRef, useEffect, useState, useCallback } from "react";
+import React, { useContext, useRef, useEffect, useState, useCallback, memo } from "react";
 import "./Modal.css";
 import { ModalContext } from "./ModalContext";
 
-// Memoize the Modal component to avoid unnecessary re-renders
 const Modal = React.memo(() => {
-  console.log("Modal Rendered");
-  
   const { modalContent, closeModal, isOpen } = useContext(ModalContext)!;
 
   const modalRef = useRef<HTMLDivElement>(null);
   const [isResizing, setIsResizing] = useState(false);
 
-  // Memoize the keydown handler to avoid unnecessary re-creations
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal();
     },
-    [closeModal] // Dependency array to ensure the callback only updates when closeModal changes
+    [closeModal]
   );
 
-  // Register and clean up the keydown event listener
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -27,7 +22,6 @@ const Modal = React.memo(() => {
     };
   }, [handleKeyDown]);
 
-  // Initialize the modal resizer (only once)
   useEffect(() => {
     if (!modalRef.current) return;
 
@@ -62,7 +56,6 @@ const Modal = React.memo(() => {
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
 
-    // Cleanup event listeners
     return () => {
       resizer.removeEventListener("mousedown", onMouseDown);
       document.removeEventListener("mousemove", onMouseMove);
@@ -85,4 +78,4 @@ const Modal = React.memo(() => {
   );
 });
 
-export default Modal;
+export default memo(Modal);

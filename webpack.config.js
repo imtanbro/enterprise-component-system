@@ -9,7 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-  mode: "production", // Change this to "production" for production builds
+  mode: "production",
   devServer: {
     static: "./dist",
     hot: true,
@@ -25,23 +25,18 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        // Regular CSS (non-module)
         test: /\.css$/,
-        exclude: /\.module\.css$/, // Exclude CSS Modules
-        use: [
-          process.env.NODE_ENV === "production" ? MiniCssExtractPlugin.loader : "style-loader", // Use style-loader in development for hot-reloading
-          "css-loader",
-        ],
+        exclude: /\.module\.css$/,
+        use: [process.env.NODE_ENV === "production" ? MiniCssExtractPlugin.loader : "style-loader", "css-loader"],
       },
       {
-        // CSS Modules
         test: /\.module\.css$/,
         use: [
-          process.env.NODE_ENV === "production" ? MiniCssExtractPlugin.loader : "style-loader", // Use style-loader in development for hot-reloading
+          process.env.NODE_ENV === "production" ? MiniCssExtractPlugin.loader : "style-loader",
           {
             loader: "css-loader",
             options: {
-              modules: true, // Enable CSS Modules
+              modules: true,
             },
           },
         ],

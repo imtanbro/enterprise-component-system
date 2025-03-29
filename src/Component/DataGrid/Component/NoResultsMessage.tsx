@@ -1,4 +1,3 @@
-// NoResultsMessage.tsx
 import React, { memo } from "react";
 
 interface NoResultsMessageProps {
