@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { memo } from "react";
+import { Outlet } from "react-router-dom";
 import NavBar from "./Component/NavBar";
 
 const LandingPage: React.FC = () => {
@@ -10,8 +10,6 @@ const LandingPage: React.FC = () => {
       <header>
         <NavBar />
       </header>
-
-      {/* The Outlet is where nested routes will render */}
       <main>
         <Outlet />
       </main>
@@ -19,4 +17,4 @@ const LandingPage: React.FC = () => {
   );
 };
 
-export default LandingPage;
+export default memo(LandingPage);

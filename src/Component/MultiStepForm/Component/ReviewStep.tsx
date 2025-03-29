@@ -5,7 +5,7 @@ interface ReviewStepProps {
   formData: FormData;
 }
 
-export const ReviewStep: React.FC<ReviewStepProps> = ({ formData }) => {
+export const ReviewStep: React.FC<ReviewStepProps> = React.memo(({ formData }) => {
   const sections = [
     {
       title: "Personal Information",
@@ -71,4 +71,4 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({ formData }) => {
       ))}
     </div>
   );
-};
+});

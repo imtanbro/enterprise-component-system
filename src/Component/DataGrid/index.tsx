@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, memo } from "react";
 import { Filter, ChevronDown, ChevronUp } from "lucide-react";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useTheme } from "../../Common/Component/ThemeContext";
 import exportToCSV from "./Methods/exportToCSV";
 import DataGridToolbar from "./Component/DataGridToolbar";
 import NoResultsMessage from "./Component/NoResultsMessage";
@@ -103,6 +102,7 @@ const DataGrid: React.FC = () => {
       </div>
     );
   };
+
   const handleRefreshData = useCallback(() => {
     setFilters({}); // Reset filters
     setShowNoResults(false); // Hide the no results message
@@ -210,4 +210,4 @@ const DataGrid: React.FC = () => {
   );
 };
 
-export default DataGrid;
+export default memo(DataGrid);
