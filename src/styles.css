@@ -549,7 +549,6 @@ main {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
   margin-top: 1rem;
-  
 }
 
 .form-card-body {
@@ -834,83 +833,32 @@ main {
 @media (max-width: 768px) {
   .data-grid-container {
     padding: 0.5rem;
-    height: auto; /* Allow auto height to fit content */
-    min-height: calc(100vh - 4rem);
+    height: calc(100vh - 4rem);
   }
 
-  /* Stack toolbar buttons vertically */
   .data-grid-toolbar {
     flex-direction: column;
-    align-items: stretch; /* Stretch buttons to fit width */
     gap: 0.5rem;
   }
 
-  /* Full-width search bar */
-  .search-box {
-    width: 100%;
-  }
-
-  /* Export button takes full width */
   .export-button {
     width: 100%;
     justify-content: center;
   }
 
-  /* Allow horizontal scrolling if needed */
-  .data-grid-wrapper {
-    width: 100%;
-    overflow-x: auto;
-  }
-
-  /* Stack headers vertically */
-  .data-grid-header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0.5rem;
-  }
-
-  /* Make rows stack in a single column */
-  .data-grid-row {
-    display: block;
-    width: 100%;
-    padding: 0.75rem;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  /* Each cell should be a full row */
   .data-grid-cell {
-    display: flex;
-    flex-direction: column;
     padding: 0.5rem;
-    border: none;
-    text-align: left;
-    width: 100%;
-    border-bottom: 1px solid var(--border-color);
+    font-size: 0.875rem;
   }
 
-  /* Add label before data */
-  .data-grid-cell::before {
-    content: attr(data-label); /* Use column name */
-    font-weight: 600;
-    display: block;
-    margin-bottom: 0.25rem;
-  }
-
-  /* Ensure headers are aligned properly */
-  .header-cell {
-    text-align: left;
-    padding: 0.5rem;
-    font-weight: 600;
-  }
-
-  /* Make filter buttons align better */
   .header-controls {
-    flex-direction: column;
-    width: 100%;
+    display: block;
   }
 
-  .header-controls button {
-    width: 100%;
-    margin-top: 0.5rem;
+  .header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
   }
 }
