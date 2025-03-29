@@ -1,12 +1,24 @@
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* You can change this to any fixed size if you want */
+}
 
-/* Loader Styling */
-.loader {
-    font-size: 24px;
-    text-align: center;
-    padding: 20px;
+.loading-spinner {
+  border: 6px solid transparent;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+  display: inline-block;
+}
+
+/* Keyframe animation to create spinning effect */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  /* Styling for loaded content */
-  .content {
-    padding: 20px;
+  100% {
+    transform: rotate(360deg);
   }
+}

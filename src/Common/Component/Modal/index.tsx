@@ -1,11 +1,11 @@
-import React, { useContext, useRef, useEffect, useState, useCallback } from "react";
+import React, { useContext, useRef, useEffect, useState, useCallback, memo } from "react";
 import "./Modal.css";
 import { ModalContext } from "./ModalContext";
 
 // Memoize the Modal component to avoid unnecessary re-renders
 const Modal = React.memo(() => {
   console.log("Modal Rendered");
-  
+
   const { modalContent, closeModal, isOpen } = useContext(ModalContext)!;
 
   const modalRef = useRef<HTMLDivElement>(null);
@@ -85,4 +85,4 @@ const Modal = React.memo(() => {
   );
 });
 
-export default Modal;
+export default memo(Modal);

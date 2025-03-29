@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./ErrorPage.css"; // Import CSS for styling
 
 const ErrorPage: React.FC = () => {
@@ -18,4 +18,4 @@ const ErrorPage: React.FC = () => {
   );
 };
 
-export default ErrorPage;
+export default memo(ErrorPage);
