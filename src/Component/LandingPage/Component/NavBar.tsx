@@ -18,7 +18,7 @@ function Navbar() {
           <Link to="/">Home</Link>
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/data-grid">Data Grid</Link>
-          <Link to="/contact">Contact</Link>
+          <Link to="/multi-step-form">Multi Step Form</Link>
         </div>
 
         <div style={{ display: "flex", gap: "0.5rem" }}>
