@@ -4,6 +4,7 @@ import { ThemeProvider } from "./Common/Component/ThemeContext";
 import { ModalProvider } from "./Common/Component/Modal/ModalContext";
 import { withCenteredLayout } from "./Component/RepositionCards";
 import Loader from "./Common/Component/Loader";
+import { CONTACT, DASHBOARD, DATA_GRID, ERROR_PAGE, HIERARCHICAL_TREE, HOME_PAGE, MULTI_STEP_FORM } from "./Common/Constants/Routes";
 
 const Navbar = lazy(() => import("./Component/LandingPage/Component/NavBar"));
 const DashboardLayout = lazy(() => import("./Component/DashboardLayout"));
@@ -12,6 +13,7 @@ const DataGrid = lazy(() => import("./Component/DataGrid"));
 const Modal = lazy(() => import("./Common/Component/Modal"));
 const ErrorPage = lazy(() => import("./Common/Component/ErrorPage"));
 const MultiStepForm = lazy(() => import("./Component/MultiStepForm"));
+const HierarchicalTree = lazy(() => import("./Component/HierarchicalTree"));
 
 const HomePageComp = withCenteredLayout(RepositionCards);
 
@@ -24,11 +26,12 @@ const App: React.FC = () => {
             <Navbar />
             <main>
               <Routes>
-                <Route path="/" element={<HomePageComp />} />
-                <Route path="/dashboard" element={<DashboardLayout />} />
-                <Route path="/multi-step-form" element={<MultiStepForm />} />
+                <Route path={HOME_PAGE} element={<HomePageComp />} />
+                <Route path={DASHBOARD} element={<DashboardLayout />} />
+                <Route path={MULTI_STEP_FORM} element={<MultiStepForm />} />
+                <Route path={HIERARCHICAL_TREE} element={<HierarchicalTree />} />
                 <Route
-                  path="/data-grid"
+                  path={DATA_GRID}
                   element={
                     <ModalProvider>
                       <DataGrid />
@@ -36,9 +39,9 @@ const App: React.FC = () => {
                     </ModalProvider>
                   }
                 />
-                <Route path="*" element={<ErrorPage />} />
+                <Route path={ERROR_PAGE} element={<ErrorPage />} />
                 <Route
-                  path="/contact"
+                  path={CONTACT}
                   element={
                     <div style={{ padding: "1rem" }}>
                       <h1 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>Contact</h1>
