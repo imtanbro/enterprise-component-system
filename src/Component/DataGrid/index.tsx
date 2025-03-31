@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from "react";
-import { Filter, ChevronDown, ChevronUp } from "lucide-react";
+import { Filter, ChevronDown, ChevronUp, PinOff, Pin } from "lucide-react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import exportToCSV from "./Methods/exportToCSV";
 import DataGridToolbar from "./Component/DataGridToolbar";
@@ -71,6 +71,10 @@ const DataGrid: React.FC = () => {
     return sortDirection === "asc" ? Number(aValue) - Number(bValue) : Number(bValue) - Number(aValue);
   });
 
+  const toggleColumnFreeze = (field: string) => {
+    setFrozenColumns((prev) => (prev.includes(field) ? prev.filter((f) => f !== field) : [...prev, field]));
+  };
+
   const handleSort = (field: string) => {
     if (sortField === field) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -129,12 +133,15 @@ const DataGrid: React.FC = () => {
                     className={`data-grid-cell header-cell ${frozenColumns.includes(column.field) ? "frozen" : ""}`}
                     style={{ width: column.width || 150 }}
                   >
-                    <div className="header-content">
+                    <div className="header-content header-flex">
                       <span onClick={() => handleSort(column.field)}>
                         {column.header}
                         {sortField === column.field && (sortDirection === "asc" ? <ChevronUp size={16} /> : <ChevronDown size={16} />)}
                       </span>
                       <div className="header-controls">
+                        <button className="pin-button" onClick={() => toggleColumnFreeze(column.field)}>
+                          {frozenColumns.includes(column.field) ? <PinOff size={16} /> : <Pin size={16} />}
+                        </button>
                         <button
                           className="filter-button"
                           onClick={() => {

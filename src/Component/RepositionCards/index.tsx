@@ -55,11 +55,15 @@ export const withCenteredLayout = (WrappedComponent: React.ComponentType<any>) =
           justifyContent: "center",
           height: "calc(100vh - 4rem)",
           flexDirection: "column",
+          padding: "1rem",
         }}
       >
         {!isMobileOrTablet && <WrappedComponent {...props} />}
 
         <h1 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>Welcome to the Dashboard!</h1>
+        <h3 style={{ fontSize: "1rem", fontWeight: "bold", textAlign: "center" }}>
+          This project contains Data Grid, Multi Step form, Dashboard and Hierarchical Tree
+        </h3>
         {!isMobileOrTablet && <h1 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>You can move cards around 😁</h1>}
       </div>
     );
