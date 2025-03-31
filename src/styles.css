@@ -901,17 +901,19 @@ main {
   align-items: center;
   cursor: pointer;
   padding: 0.5rem;
-  background-color: #f4f4f4;
+  background-color: var(--border-color); /* Use background variable */
   border-radius: 4px;
+  box-shadow: var(--shadow-sm);
 }
 
 .node-header:hover {
-  background-color: #e0e0e0;
+  background-color: var(--bg-primary); /* On hover, use the primary background */
 }
 
 .node-name {
   display: flex;
   align-items: center;
+  color: var(--text-primary); /* Text color */
 }
 
 .node-actions {
@@ -925,11 +927,11 @@ main {
 
 .add-folder,
 .add-file {
-  color: green;
+  color: var(--success-color); /* Use the success color */
 }
 
 .remove-node {
-  color: red;
+  color: var(--danger-color); /* Use the danger color */
 }
 
 /* Mobile-first styles */
